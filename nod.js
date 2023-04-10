@@ -1,4 +1,5 @@
 const getBodyElement = document.body;
+console.log(nodlink)
 let displayNod = false;
 let iframestyle = "position: fixed; right: 23px; bottom: 100px; z-index: 997;";
 
@@ -8,7 +9,7 @@ if (getBodyElement !== null) {
         "position: fixed; right: 23px; bottom: 23px; background-color: #34568B; border-radius: 50%; z-index: 997;height:70px;width:70px;display:flex;justify-content:center;align-items:center;";
 
     let iframeNode = document.createElement("iframe");
-    iframeNode.src = "https://link.yournod.com/rTVccv";
+    iframeNode.src = nodlink;
     iframeNode.style = iframestyle + " ; display:none";
     iframeNode.title = "Just Nod";
     iframeNode.width = "350";
