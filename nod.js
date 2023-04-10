@@ -1,43 +1,84 @@
 const getBodyElement = document.body;
-console.log(nodlink)
+const head = document.head || document.getElementsByTagName('head')[0];
+
 let displayNod = false;
-let iframestyle = "position: fixed; right: 23px; bottom: 100px; z-index: 997;";
+
+const nodBtnStyle = document.createElement('style');
+nodBtnStyle.textContent = `
+
+  .nodContainer {
+    position: fixed; 
+    right: 23px; 
+    bottom: 23px; 
+    background-color: #34568B; 
+    border-radius: 50%; 
+    z-index: 997;
+    height:70px;
+    width:70px;
+    display:flex;
+    justify-content:center;
+    align-items:center;";
+  }
+
+  .nodBtn {
+    background:transparent; 
+    border:none; 
+    cursor: pointer; 
+    font-size: 13px; 
+    text-decoration: none; 
+    color: #FFFFFF; 
+    font-family: sans-serif; 
+    z-index: 1;
+    height:70px;
+    width:70px;
+    border-radius:50%;
+  }
+
+  .nodBtn:hover{
+    background-color:violet;
+  }
+
+  .nodiFrame {
+    position: fixed; 
+    right: 23px; 
+    bottom: 100px; 
+    z-index: 997;
+  }
+`;
+
+head.appendChild(nodBtnStyle);
 
 if (getBodyElement !== null) {
-    let parentNode = document.createElement("div");
-    parentNode.style =
-        "position: fixed; right: 23px; bottom: 23px; background-color: #34568B; border-radius: 50%; z-index: 997;height:70px;width:70px;display:flex;justify-content:center;align-items:center;";
+  let parentNode = document.createElement("div");
+  parentNode.className = 'nodContainer';
 
-    let iframeNode = document.createElement("iframe");
-    iframeNode.src = nodlink;
-    iframeNode.style = iframestyle + " ; display:none";
-    iframeNode.title = "Just Nod";
-    iframeNode.width = "350";
-    iframeNode.height = "500";
-    iframeNode.allow = "camera; microphone";
+  let iframeNode = document.createElement("iframe");
+  iframeNode.src = nodlink;
+  iframeNode.className = 'nodiFrame';
+  iframeNode.title = "Just Nod";
+  iframeNode.width = "350";
+  iframeNode.height = "500";
+  iframeNode.allow = "camera; microphone";
 
-    var nodButton = document.createElement('button');
-    nodButton.innerHTML = 'Show NOD';
-    nodButton.style =
-        "background:transparent; border:none; cursor: pointer; font-size: 13px; text-decoration: none; color: #FFFFFF; font-family: sans-serif; z-index: 1;height:70px;width:70px;border-radius:50%;";
-    nodButton.onclick = function () {
-        //alert('here be dragons');
-        displayNod = !displayNod;
-        console.log("Display NOD :", displayNod);
-
-        if (displayNod) {
-            nodButton.innerHTML = 'Hide NOD';
-            iframeNode.style = iframestyle + "; display:block";
-        } else {
-            nodButton.innerHTML = 'Show NOD';
-            iframeNode.style = iframestyle + "; display:none";
-        }
-
-        return false;
-    };
-    parentNode.appendChild(nodButton);
-
-
-    getBodyElement.appendChild(parentNode);
-    getBodyElement.appendChild(iframeNode);
+  let nodButton = document.createElement('button');
+  nodButton.innerHTML = 'Show NOD';
+  nodButton.className = 'nodBtn';
+  nodButton.onclick = function () {
+    displayNod = !displayNod;
+    if (displayNod) {
+      nodButton.innerHTML = 'Hide NOD';
+      getBodyElement.appendChild(iframeNode);
+    } else {
+      nodButton.innerHTML = 'Show NOD';
+      getBodyElement.removeChild(iframeNode);
+    }
+    return false;
+  };
+  parentNode.appendChild(nodButton);
+  getBodyElement.appendChild(parentNode);
 }
+
+//Handy
+// var my_awesome_script = document.createElement('script');
+// my_awesome_script.setAttribute('src','http://example.com/site.js');
+// document.head.appendChild(my_awesome_script);
