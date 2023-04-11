@@ -43,6 +43,8 @@ nodBtnStyle.textContent = `
     right: 23px; 
     bottom: 100px; 
     z-index: 997;
+    border:0;
+    border-radius:0.5rem;
   }
 `;
 
